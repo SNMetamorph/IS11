@@ -24,26 +24,56 @@ function ShootRotRectTarget(x, y, radius)
 // круглая мишень
 function ShootRoundTarget(x, y, radius)
 {
-	if (Math.sqrt(x * x + y * y) <= radius)
+	return Math.sqrt(x * x + y * y) <= radius;
+}
+
+// квадратная мишень
+function ShootRectTarget(x, y, radius)
+{
+	if (Math.abs(x) <= radius && Math.abs(y) <= radius)
 		return true;
 	else
 		return false;
 }
 
-document.getElementById("buttonShoot").addEventListener("click", function() {
-	var shootX 			= document.getElementById("inputShootCoordX").value;
-	var shootY 			= document.getElementById("inputShootCoordX").value;
-	var targetX 		= document.getElementById("inputTargetCoordX").value;
-	var targetY 		= document.getElementById("inputTargetCoordY").value;
-	var targetRadius 	= document.getElementById("inputTargetRadius").value;
-	var textStatus 		= document.getElementById("textStatus");
+function GetElementNumber(elementId)
+{
+	return document.getElementById(elementId).value - 0;
+}
 
-	var targetCheckFunc = ShootRoundTarget;
+function PrintShootResult(isSuccess)
+{
+	var textStatus = document.getElementById("textStatus");
+	textStatus.innerHTML = (isSuccess) ? "Попал в мишень" : "Промахнулся";
+}
+
+function ShootTarget(targetFunc)
+{
+	var shootX 			= GetElementNumber("inputShootCoordX");
+	var shootY 			= GetElementNumber("inputShootCoordY");
+	var targetX 		= GetElementNumber("inputTargetCoordX");
+	var targetY 		= GetElementNumber("inputTargetCoordY");
+	var targetRadius 	= GetElementNumber("inputTargetRadius");
+
 	var relX = shootX - targetX;
 	var relY = shootY - targetY;
+	PrintShootResult(
+		targetFunc(relX, relY, targetRadius)
+	);
+}
 
-	if (targetCheckFunc(relX, relY, targetRadius))
-		textStatus.innerHTML = "Попал в мишень";
-	else
-		textStatus.innerHTML = "Промахнулся";
+document.getElementById("buttonShoot1").addEventListener("click", function() {
+	ShootTarget(ShootRoundTarget);
+});
+
+document.getElementById("buttonShoot2").addEventListener("click", function() {
+	ShootTarget(ShootRotRectTarget);
+});
+
+document.getElementById("buttonShoot3").addEventListener("click", function() {
+	ShootTarget(ShootHyperbTarget);
+});
+
+document.getElementById("buttonShoot4").addEventListener("click", function() {
+	ShootTarget(ShootRectTarget);
 });
