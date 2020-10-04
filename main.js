@@ -36,6 +36,15 @@ function ShootRectTarget(x, y, radius)
 		return false;
 }
 
+// все мишени вместе
+function ShootAllTargets(x, y, radius)
+{
+	return ShootHyperbTarget(x, y, radius) || 
+		   ShootRectTarget(x, y, radius) ||
+		   ShootRoundTarget(x, y, radius) || 
+		   ShootRotRectTarget(x, y, radius);
+}
+
 function GetElementNumber(elementId)
 {
 	return document.getElementById(elementId).value - 0;
@@ -76,4 +85,8 @@ document.getElementById("buttonShoot3").addEventListener("click", function() {
 
 document.getElementById("buttonShoot4").addEventListener("click", function() {
 	ShootTarget(ShootRectTarget);
+});
+
+document.getElementById("buttonShoot5").addEventListener("click", function() {
+	ShootTarget(ShootAllTargets);
 });
