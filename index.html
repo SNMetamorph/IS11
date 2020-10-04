@@ -1,36 +1,12 @@
-<html>
+﻿<html>
     <head>
         <meta charset="utf-8"/>
     </head>
     <body>
-        <p>
-            Коорд. X выстрела
-            <input id="inputShootCoordX" type="text" value="0.5"></input>
-        </p>
-        <p>
-            Коорд. Y выстрела
-            <input id="inputShootCoordY" type="text" value="0.5"></input>
-        </p>
-        <p>
-            Коорд. X мишени
-            <input id="inputTargetCoordX" type="text" value="0.0"></input>
-        </p>
-        <p>
-            Коорд. Y мишени
-            <input id="inputTargetCoordY" type="text" value="0.0"></input>
-        </p>
-        <p>
-            Радиус мишени
-            <input id="inputTargetRadius" type="text" value="1.0"></input>
-        </p>
-        <button id="buttonShoot1">Выстрелить в круглую мишень</button>
-        <br>
-        <button id="buttonShoot2">Выстрелить в мишень-ромб</button>
-        <br>
-        <button id="buttonShoot3">Выстрелить в мишень-гиперболу</button>
-        <br>
-        <button id="buttonShoot4">Выстрелить в квадратную мишень</button>
-        <b id="textStatus"></b>
+        <b id="questionText"></b>
+        <br/>
+        <input placeholder="Куда ты хочешь пойти?" type="text" id="playerAnswer" />
+        <button id="goToLocation">ОК</button>
+        <script type="text/javascript" src="main.js"></script>
     </body>
-    <script type="text/javascript" src="main.js"></script>
 </html>

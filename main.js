@@ -1,79 +1,73 @@
-﻿// гиперболическая мишень
-function ShootHyperbTarget(x, y, radius)
+﻿var step = 0;
+var roomsList = [
+    // дом
+    [
+        "Ты собрался прогуляться. Куда направишься?", // cообщение-вопрос
+        ["впарк", "вкафе"], // варианты путей
+        ["Ты направился в парк", "Ты направился в кафе"], // варианты сообщений-ответов
+        [1, 2] // номера комнат, соответствующие вариантам путей
+    ],
+    // парк
+    [
+        "Ты пришел в парк. Куда теперь?", // cообщение-вопрос
+        ["домой", "наплощадь"], // варианты путей
+        ["Уже? Домой? Но почему так рано :(", "На площадь так на площадь!"], // варианты сообщений-ответов
+        [0, 3] // номера комнат, соответствующие вариантам путей
+    ],
+    // кафе
+    [
+        "Ты пришел в кафе, но деньги с собой не взял. Куда теперь идти?", // cообщение-вопрос
+        ["домой", "наплощадь", "впарк"], // варианты путей
+        ["Домой? Далеко, но уж ладно.", "Идем на площадь", "Теперь идем в парк"], // варианты сообщений-ответов
+        [0, 3, 1] // номера комнат, соответствующие вариантам путей
+    ],
+    // площадь
+    [
+        "Ты припёрся на площадь. Отсюда недалеко до парка. Куда направляешься дальше?",
+        ["впарк", "вкафе"],
+        ["Теперь идем в парк", "Теперь идем в кафе"],
+        [1, 2]
+    ]
+];
+
+function GetUserAnswer()
 {
-	if (x >= 0 && (y <= radius / x && y >= -radius / x)) {
-		return true;
-	}
-	else if (x < 0 && (y <= -radius / x && y >= radius / x)) {
-		return true;
-	}
-	return false;
+    return document.getElementById("playerAnswer").value
 }
 
-// мишень-ромб
-function ShootRotRectTarget(x, y, radius)
+function SetQuestionText(text)
 {
-	var isRightPart = (x >= 0 && Math.abs(y) <= Math.abs(radius - x));
-	var isLeftPart = (x < 0 && Math.abs(y) <= Math.abs(x + radius));
-	if (isRightPart || isLeftPart)
-		return true;
-	else
-		return false;
+    document.getElementById("questionText").innerHTML = text;
 }
 
-// круглая мишень
-function ShootRoundTarget(x, y, radius)
+function GoToLocation()
 {
-	return Math.sqrt(x * x + y * y) <= radius;
+    var currentRoom = roomsList[step];
+    if (!currentRoom) {
+        return;
+    }
+
+    var questionText = currentRoom[0];
+    var wayCases = currentRoom[1];
+    var answerMessages = currentRoom[2];
+    var roomNumbers = currentRoom[3];
+    var answerText = GetUserAnswer().toLowerCase().replace(" ", "");
+
+    for (var i = 0; i < wayCases.length; ++i)
+    {
+        if (answerText === wayCases[i])
+        {
+            step = roomNumbers[i];
+            currentRoom = roomsList[step];
+            questionText = currentRoom[0];
+            SetQuestionText(questionText);
+            break;
+        }
+    }
 }
 
-// квадратная мишень
-function ShootRectTarget(x, y, radius)
-{
-	if (Math.abs(x) <= radius && Math.abs(y) <= radius)
-		return true;
-	else
-		return false;
-}
+document.getElementById("goToLocation").addEventListener("click", GoToLocation);
 
-function GetElementNumber(elementId)
-{
-	return document.getElementById(elementId).value - 0;
-}
-
-function PrintShootResult(isSuccess)
-{
-	var textStatus = document.getElementById("textStatus");
-	textStatus.innerHTML = (isSuccess) ? "Попал в мишень" : "Промахнулся";
-}
-
-function ShootTarget(targetFunc)
-{
-	var shootX 			= GetElementNumber("inputShootCoordX");
-	var shootY 			= GetElementNumber("inputShootCoordY");
-	var targetX 		= GetElementNumber("inputTargetCoordX");
-	var targetY 		= GetElementNumber("inputTargetCoordY");
-	var targetRadius 	= GetElementNumber("inputTargetRadius");
-
-	var relX = shootX - targetX;
-	var relY = shootY - targetY;
-	PrintShootResult(
-		targetFunc(relX, relY, targetRadius)
-	);
-}
-
-document.getElementById("buttonShoot1").addEventListener("click", function() {
-	ShootTarget(ShootRoundTarget);
-});
-
-document.getElementById("buttonShoot2").addEventListener("click", function() {
-	ShootTarget(ShootRotRectTarget);
-});
-
-document.getElementById("buttonShoot3").addEventListener("click", function() {
-	ShootTarget(ShootHyperbTarget);
-});
-
-document.getElementById("buttonShoot4").addEventListener("click", function() {
-	ShootTarget(ShootRectTarget);
-});
+// дз. добавить кнопки стрельбы во все мишени
+// *переписать игру на функции и сделать UX-интерфейс в котором пользователль будет в input писать куда он хочет пойти
+// **в репозитории создать новую ветку rpg и в нее залить код игры
