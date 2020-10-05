@@ -30,10 +30,12 @@ function sortArray2()
 {
 	var arr = getArray();
 	var arrInv = [];
+
 	for (var i = 1; i < (arr.length + 1); ++i)
 	{
 		arrInv.push(arr[arr.length - i]);
 	}
+
 	printArray(arrInv);
 }
 
@@ -67,7 +69,6 @@ function sortArray4()
 		if (i % 2 == 0) {
 			arrOutput[i] = arr[index1];
 			++index1;
-			
 		} else {
 			arrOutput[i] = arr[index2];
 			--index2;
@@ -81,10 +82,11 @@ function sortArray5()
 {
 	var arr = getArray();
 	var arrOutput = [];
+	var evenNum = document.getElementById("evenNumInput").value - 0;
 
 	for (var i = 0; i < arr.length; ++i)
 	{
-		if (arr[i] % 3 == 0) {
+		if (arr[i] % evenNum == 0) {
 			arrOutput.push(arr[i]);
 		}
 	}
