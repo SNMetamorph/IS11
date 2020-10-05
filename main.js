@@ -61,17 +61,17 @@ function sortArray4()
 {
 	var arr = getArray();
 	var arrOutput = [];
-	var index1 = 0;
-	var index2 = arr.length - 1;
+	var index = 0;
+	var indexInv = arr.length - 1;
 
 	for (var i = 0; i < arr.length; ++i)
 	{
 		if (i % 2 == 0) {
-			arrOutput[i] = arr[index1];
-			++index1;
+			arrOutput[i] = arr[index];
+			++index;
 		} else {
-			arrOutput[i] = arr[index2];
-			--index2;
+			arrOutput[i] = arr[indexInv];
+			--indexInv;
 		}
 	}
 
@@ -99,3 +99,6 @@ document.getElementById("sortArray2").addEventListener("click", sortArray2);
 document.getElementById("sortArray3").addEventListener("click", sortArray3);
 document.getElementById("sortArray4").addEventListener("click", sortArray4);
 document.getElementById("sortArray5").addEventListener("click", sortArray5);
+// д/з страница с вводом 2х векторов, кнопки для действий с векторами (+, -, скалярн. произведение, вычисление угла)
+// результат выводить в 3й input
+// добавить проверку что векторы должны быть одинаковой длины
