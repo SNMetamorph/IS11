@@ -1,92 +1,99 @@
-﻿// гиперболическая мишень
-function ShootHyperbTarget(x, y, radius)
+﻿
+function getArray()
 {
-	if (x >= 0 && (y <= radius / x && y >= -radius / x)) {
-		return true;
+	var arrayStr = document.getElementById("inputArray").value;
+	if (arrayStr) {
+		var numArray = arrayStr.trim().split(" ");
+		for (var i = 0; i < numArray.length; ++i) {
+			numArray[i] -= 0;
+		}
+		return numArray;
 	}
-	else if (x < 0 && (y <= -radius / x && y >= radius / x)) {
-		return true;
+	return [];
+}
+
+function printArray(arr)
+{
+	document.getElementById("inputArray").value = arr.join(" ");
+}
+
+function sortArray1()
+{
+	var arr = getArray();
+	arr.sort(function(a, b) {
+		return a - b;
+	});
+	printArray(arr);
+}
+
+function sortArray2()
+{
+	var arr = getArray();
+	var arrInv = [];
+	for (var i = 1; i < (arr.length + 1); ++i)
+	{
+		arrInv.push(arr[arr.length - i]);
 	}
-	return false;
+	printArray(arrInv);
 }
 
-// мишень-ромб
-function ShootRotRectTarget(x, y, radius)
+function sortArray3()
 {
-	var isRightPart = (x >= 0 && Math.abs(y) <= Math.abs(radius - x));
-	var isLeftPart = (x < 0 && Math.abs(y) <= Math.abs(x + radius));
-	if (isRightPart || isLeftPart)
-		return true;
-	else
-		return false;
+	var arr = getArray();
+	var arrOdd = [];
+	var arrEven = [];
+
+	for (var i = 0; i < arr.length; ++i)
+	{
+		if (arr[i] % 2 == 0) {
+			arrEven.push(arr[i]);
+		}
+		else {
+			arrOdd.push(arr[i]);
+		}
+	}
+	printArray(arrEven.concat(arrOdd));
 }
 
-// круглая мишень
-function ShootRoundTarget(x, y, radius)
+function sortArray4()
 {
-	return Math.sqrt(x * x + y * y) <= radius;
+	var arr = getArray();
+	var arrOutput = [];
+	var index1 = 0;
+	var index2 = arr.length - 1;
+
+	for (var i = 0; i < arr.length; ++i)
+	{
+		if (i % 2 == 0) {
+			arrOutput[i] = arr[index1];
+			++index1;
+			
+		} else {
+			arrOutput[i] = arr[index2];
+			--index2;
+		}
+	}
+
+	printArray(arrOutput);
 }
 
-// квадратная мишень
-function ShootRectTarget(x, y, radius)
+function sortArray5()
 {
-	if (Math.abs(x) <= radius && Math.abs(y) <= radius)
-		return true;
-	else
-		return false;
+	var arr = getArray();
+	var arrOutput = [];
+
+	for (var i = 0; i < arr.length; ++i)
+	{
+		if (arr[i] % 3 == 0) {
+			arrOutput.push(arr[i]);
+		}
+	}
+
+	printArray(arrOutput);
 }
 
-// все мишени вместе
-function ShootAllTargets(x, y, radius)
-{
-	return ShootHyperbTarget(x, y, radius) || 
-		   ShootRectTarget(x, y, radius) ||
-		   ShootRoundTarget(x, y, radius) || 
-		   ShootRotRectTarget(x, y, radius);
-}
-
-function GetElementNumber(elementId)
-{
-	return document.getElementById(elementId).value - 0;
-}
-
-function PrintShootResult(isSuccess)
-{
-	var textStatus = document.getElementById("textStatus");
-	textStatus.innerHTML = (isSuccess) ? "Попал в мишень" : "Промахнулся";
-}
-
-function ShootTarget(targetFunc)
-{
-	var shootX 			= GetElementNumber("inputShootCoordX");
-	var shootY 			= GetElementNumber("inputShootCoordY");
-	var targetX 		= GetElementNumber("inputTargetCoordX");
-	var targetY 		= GetElementNumber("inputTargetCoordY");
-	var targetRadius 	= GetElementNumber("inputTargetRadius");
-
-	var relX = shootX - targetX;
-	var relY = shootY - targetY;
-	PrintShootResult(
-		targetFunc(relX, relY, targetRadius)
-	);
-}
-
-document.getElementById("buttonShoot1").addEventListener("click", function() {
-	ShootTarget(ShootRoundTarget);
-});
-
-document.getElementById("buttonShoot2").addEventListener("click", function() {
-	ShootTarget(ShootRotRectTarget);
-});
-
-document.getElementById("buttonShoot3").addEventListener("click", function() {
-	ShootTarget(ShootHyperbTarget);
-});
-
-document.getElementById("buttonShoot4").addEventListener("click", function() {
-	ShootTarget(ShootRectTarget);
-});
-
-document.getElementById("buttonShoot5").addEventListener("click", function() {
-	ShootTarget(ShootAllTargets);
-});
+document.getElementById("sortArray").addEventListener("click", sortArray1);
+document.getElementById("sortArray2").addEventListener("click", sortArray2);
+document.getElementById("sortArray3").addEventListener("click", sortArray3);
+document.getElementById("sortArray4").addEventListener("click", sortArray4);
+document.getElementById("sortArray5").addEventListener("click", sortArray5);
