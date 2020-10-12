@@ -1,0 +1,14 @@
+.calcBtn {
+    min-height: 40px;
+    min-width: 65px;
+    font-weight: bold;
+}
+
+#numberField {
+    min-width: 278px;
+    text-align: right;
+}
+
+.widthBtn {
+    min-width: 134px;
+}
