@@ -1,23 +1,48 @@
 <html>
     <head>
-        <title>Графики 2D</title>
+        <title>Framework</title>
         <meta charset="utf-8"/>
-        <script src="js/UI.js"></script>
-        <script src="js/Graph.js"></script>
-        <script src="js/main.js"></script>
         <link rel="stylesheet" href="css/style.css"></link> 
     </head>
     <body>
-        <button id="toggleMenu">Отобразить/скрыть меню</button>
-        <br>
-        <canvas id="canvas"></canvas>
-        <div id="menu">
-            <button id="addFunction">Добавить ф-цию</button>
-            <br>
-            <input id="a" placeholder="a" class="graphFuncInput"></input>
-            <input id="b" placeholder="b" class="graphFuncInput"></input>
-            <br>
-            <div id="functions"></div>
-        </div>
+		<!-- calculator -->
+		<script src="js/application/calculator/entities/Complex.js"></script>
+		<script src="js/application/calculator/entities/Matrix.js"></script>
+		<script src="js/application/calculator/entities/Vector.js"></script>
+		<script src="js/application/calculator/entities/PolynomialMember.js"></script>
+		<script src="js/application/calculator/entities/Polynomial.js"></script>
+
+		<script src="js/application/calculator/calculators/RealCalculator.js"></script>
+		<script src="js/application/calculator/calculators/ComplexCalculator.js"></script>
+		<script src="js/application/calculator/calculators/VectorCalculator.js"></script>
+		<script src="js/application/calculator/calculators/MatrixCalculator.js"></script>
+		<script src="js/application/calculator/calculators/PolynomialCalculator.js"></script>
+		<script src="js/application/calculator/calculators/UniversalCalculator.js"></script>
+
+		<!-- graph 2D -->
+		<script src="js/application/graph2D/UI.js"></script>
+
+		<!-- graph 3D -->
+		<script src="js/application/graph3D/entities/Point.js"></script>
+		<script src="js/application/graph3D/entities/Edge.js"></script>
+		<script src="js/application/graph3D/entities/Subject.js"></script>
+		<script src="js/application/graph3D/surfaces/Surface.js"></script>
+		<script src="js/application/graph3D/surfaces/cube.js"></script>
+
+		<script src="js/application/Template.js"></script>
+		<script src="js/application/Component.js"></script>
+		<script src="js/application/graph2D/graph2DTemplate.js"></script>
+		<script src="js/application/graph2D/Graph2DComponent.js"></script>
+		<script src="js/application/graph3D/graph3DTemplate.js"></script>
+		<script src="js/application/graph3D/Graph3DComponent.js"></script>
+		<script src="js/application/calculator/calculatorTemplate.js"></script>
+		<script src="js/application/calculator/CalculatorComponent.js"></script>
+		<script src="js/application/header/headerTemplate.js"></script>
+		<script src="js/application/header/Header.js"></script>
+		<script src="js/application/app/appTemplate.js"></script>
+		<script src="js/application/app/App.js"></script>
+		<script src="js/application/graph2D/Graph2D.js"></script>
+		<script src="js/application/graph3D/Graph3D.js"></script>
+		<script src="js/index.js"></script>
     </body>
 </html>
