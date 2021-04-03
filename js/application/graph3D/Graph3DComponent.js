@@ -9,7 +9,7 @@ class Graph3DComponent extends Component {
             center: new Point(0, 0, -30),
             camera: new Point(0, 0, -50)
         }
-        this.sur = new Surface();
+        this.surface = new Surface();
         this.graph2D = new Graph2D({ 
             id: "graph3D", 
             WINDOW: this.WINDOW,
@@ -17,11 +17,31 @@ class Graph3DComponent extends Component {
             height: 600
         });
         this.graph3D = new Graph3D({ WINDOW: this.WINDOW });
+        this.canRotate = false;
+        this.subjects = [];
+        this.dx = 0;
+        this.dy = 0;
+        this.addSubjects();
         this.printScene();
+    }
+    
+    addEventListeners() {
+        document.getElementById("graph3D").addEventListener("mouseup", () => this.mouseup());
+        document.getElementById("graph3D").addEventListener("mousedown", (event) => this.mousedown(event));
+        document.getElementById("graph3D").addEventListener("mouseleave", () => this.mouseleave());
+        document.getElementById("graph3D").addEventListener("mousemove", (event) => this.mousemove(event));
+        document.getElementById("graph3D").addEventListener("wheel", (event) => this.mousewheel(event));
     }
 
     clear() {
         this.graph2D.clear('#bbb');
+    }
+
+    addSubjects() {
+        this.subjects.push(this.surface.cube(-5, -5, 0, 10));
+        this.subjects.push(this.surface.cube(-10, -25, 0, 5));
+        this.subjects.push(this.surface.cube(3, -25, 0, 2.5));
+        //this.subjects.push(this.surface.bublik(32));
     }
 
     printSubject(subject) {
@@ -43,7 +63,54 @@ class Graph3DComponent extends Component {
 
     printScene() {
         this.clear();
-        this.printSubject(this.sur.cube(-5, -5));
+        this.subjects.forEach((subject) => this.printSubject(subject));
     }
 
+    mouseup() {
+        this.canRotate = false;
+    }
+
+    mousedown(event) {
+        this.canRotate = true;
+        this.dx = event.offsetX;
+        this.dy = event.offsetY;
+    }
+
+    mouseleave() {
+        this.canRotate = false;
+    }
+
+    mousewheel(event) {
+        let moveStep = (event.deltaY > 0) ? -1 : 1;
+        this.subjects.forEach((subject) => {
+            subject.points.forEach(point => { 
+                this.graph3D.move(0, 0, moveStep, point);
+            })
+        });
+        
+        this.printScene();
+    }
+
+    mousemove(event) {
+        const deltaX = event.offsetX - this.dx;
+        const deltaY = event.offsetY - this.dy;
+        if (this.canRotate) {
+            const gradus = 2 * Math.PI / 360 * 1;
+            this.subjects.forEach((subject) => {
+                subject.points.forEach(point => { 
+                    const isRightButton = event.buttons & 2;
+                    if (isRightButton) {
+                        this.graph3D.rotateOz(deltaY * gradus, point);
+                    }
+                    else {
+                        this.graph3D.rotateOy(deltaX * gradus, point);
+                        this.graph3D.rotateOx(deltaY * gradus, point);
+                    }
+                });
+            });
+            this.dx = event.offsetX;
+            this.dy = event.offsetY;
+            this.printScene();
+        }
+    }
 }

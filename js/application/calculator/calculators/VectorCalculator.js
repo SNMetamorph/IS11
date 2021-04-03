@@ -22,11 +22,11 @@ class VectorCalculator extends RealCalculator {
     }
     mult(a, b) { // only for 3-dim
         const calc = this.get(a.values[0]);
-        return new Vector(
-            calc.sub(calc.mult(a[1], b[2]), calc.mult(a[2], b[1])),
-            calc.sub(calc.mult(a[2], b[0]), calc.mult(a[0], b[2])),
-            calc.sub(calc.mult(a[0], b[1]), calc.mult(a[1], b[0]))
-        );
+        return new Vector([
+            calc.sub(calc.mult(a.values[1], b.values[2]), calc.mult(a.values[2], b.values[1])),
+            calc.sub(calc.mult(a.values[2], b.values[0]), calc.mult(a.values[0], b.values[2])),
+            calc.sub(calc.mult(a.values[0], b.values[1]), calc.mult(a.values[1], b.values[0]))
+        ]);
     }
     one(length, elem) {
         const calc = this.get(elem);

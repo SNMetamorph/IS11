@@ -1,19 +1,22 @@
 class MatrixCalculator extends RealCalculator {
     add(a, b) {
-        const calc = this.get(this.values[0][0]);
-        return new MatrixCalculator(a.values.map(
-            (arr, i) => arr.map(
-                (elem, j) => calc.add(elem, b.values[i][j])
-            )
+        const calc = this.get(a.values[0][0]);
+        return new Matrix(a.values.map(
+            (arr, i) => arr.map((elem, j) => calc.add(elem, b.values[i][j]))
         ));
     }
     sub(a, b) {
-        const calc = this.get(this.values[0][0]);
-        return new MatrixCalculator(a.values.map(
-            (arr, i) => arr.map(
-                (elem, j) => calc.sub(elem, b.values[i][j])
-            )
+        const calc = this.get(a.values[0][0]);
+        return new Matrix(a.values.map(
+            (arr, i) => arr.map((elem, j) => calc.sub(elem, b.values[i][j]))
         ));
+    }
+    mult(a, b) { // TODO
+        const calc = this.get(a.values[0][0]);
+        return new Matrix([]);
+    }
+    div(a, b) {
+        return null;
     }
     one(length, elem) {
         const calc = this.get(elem);
@@ -38,8 +41,5 @@ class MatrixCalculator extends RealCalculator {
             }
         }
         return new Matrix(values);
-    }
-    div(a, b) {
-        return null;
     }
 }
