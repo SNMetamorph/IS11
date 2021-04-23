@@ -46,11 +46,6 @@ class Graph3DComponent extends Component {
         //this.subjects.push(this.surface.bublik(32, 20));
     }
 
-    printSubject(subject) {
-        this.printEdges(subject);
-        this.printPoints(subject);
-    }
-
     printEdges(subject) {
         for (let i = 0; i < subject.edges.length; ++i)
         {
@@ -65,17 +60,15 @@ class Graph3DComponent extends Component {
         for (let i = 0; i < subject.points.length; ++i)
         {
             const point = subject.points[i];
-            this.graph2D.drawText(this.graph3D.xs(point), this.graph3D.ys(point), i, 12, 10, -10, "red");
+            this.graph2D.drawText(this.graph3D.xs(point), this.graph3D.ys(point), i, 12, 10, -10, "black");
             this.graph2D.drawPoint(this.graph3D.xs(point), this.graph3D.ys(point));
         }
     }
 
     printScene() {
         this.clear();
-        //this.graph2D.drawAxes();
         const polygones = [];
         this.subjects.forEach((subject) => { 
-            this.printSubject(subject);
             this.graph3D.calcDistance(subject, this.WINDOW.camera, 'distance');
             this.graph3D.calcDistance(subject, this.LIGHT, 'lumen');
 
@@ -96,6 +89,7 @@ class Graph3DComponent extends Component {
             }
         });
         
+        // draw polygones
         this.graph3D.sortByArtistAlgorithm(polygones);
         for (let i = 0; i < polygones.length; ++i) {
             const points = polygones[i].points;
@@ -108,6 +102,12 @@ class Graph3DComponent extends Component {
             }
             this.graph2D.drawPolygon(array, polygones[i].color);
         }
+
+        // draw points and edges
+        this.subjects.forEach((subject) => {
+            this.printEdges(subject);
+            //this.printPoints(subject);
+        });
     }
 
     mouseup() {
