@@ -42,9 +42,9 @@ class Graph3DComponent extends Component {
         //this.subjects.push(this.surface.cube(-5, -5, 0, 10));
         this.subjects.push(this.surface.cube(-10, -25, 0, 5));
         this.subjects.push(this.surface.cube(3, -25, 0, 2.5));
-        this.subjects.push(this.surface.sphere(-16, -10, 0));
+        this.subjects.push(this.surface.sphere());
         //this.subjects.push(this.surface.bublik(32, 20));
-        this.subjects.push(this.surface.ellipticalCylinder());
+        this.subjects.push(this.surface.ellipticalCylinder(-16, -10, 0));
     }
 
     printEdges(subject) {

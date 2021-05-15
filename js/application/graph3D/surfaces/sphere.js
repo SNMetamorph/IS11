@@ -25,6 +25,50 @@ Surface.prototype.sphere = (x = 0, y = 0, z = 0, radius = 4, step = 12) => {
         points.push(createPointFromSpherical(radius, Math.PI, 0).add(x, y, z));
     }
 
+    function createUpperCupEdges(step) {
+        for (let i = 0; i < step - 1; ++i) {
+            edges.push(new Edge(1 + (step - 1) * i, 0));
+            edges.push(new Edge(1 + (step - 1) * i, 1 + (step - 1) * (i+1)));
+        }
+        edges.push(new Edge(0, 1 + (step - 1) * (step - 1)));
+        edges.push(new Edge(1, 1 + (step - 1) * (step - 1)));
+    }
+
+    function createLowerCupEdges(step) {
+        const lastIndex = ((step - 1) * step) + 1;
+        for (let i = 1; i < step; ++i) {
+            edges.push(new Edge((step - 1) * i, lastIndex));
+            edges.push(new Edge((step - 1) * i, (step - 1) * (i+1)));
+        }
+        edges.push(new Edge(lastIndex - 1, lastIndex));
+        edges.push(new Edge(lastIndex - 1, step - 1));
+    }
+
+    function createVertEdges(step) {
+        for (let j = 0; j < step; ++j) {
+            for (let i = 1; i < step - 1; ++i) {
+                const a = (step - 1) * j;
+                edges.push(new Edge(a + i, a + i + 1));
+            }
+        }
+    }
+
+    function createHorzEdges(step) {
+        for (let j = 0; j < step - 2; ++j) {
+            for (let i = 0; i < step - 1; ++i) {
+                edges.push(new Edge(2 + j + (step-1) * i, 2 + j + (i+1) * (step-1)));
+            }
+            edges.push(new Edge(2 + j, 2 + j + (step-1) * (step-1)));
+        }
+    }
+
+    function createEdges(step) {
+        createUpperCupEdges(step);
+        createLowerCupEdges(step);
+        createVertEdges(step);
+        createHorzEdges(step);
+    }
+
     function createMainPartPolys(step, quads) {
         for (let i = 0; i < step - 1; ++i) {
             for (let j = 0; j < step - 2; ++j) {
@@ -73,6 +117,7 @@ Surface.prototype.sphere = (x = 0, y = 0, z = 0, radius = 4, step = 12) => {
     }
 
     createPoints(x, y, z, radius, step);
+    createEdges(step);
     createPolygons(step);
     return new Subject(points, edges, polygones);
 }
