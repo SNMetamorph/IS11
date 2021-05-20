@@ -1,3 +1,4 @@
+// сфера
 Surface.prototype.sphere = (x = 0, y = 0, z = 0, radius = 4, step = 12) => {
     const points = [];
     const edges = [];

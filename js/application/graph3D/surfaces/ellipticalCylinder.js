@@ -1,3 +1,4 @@
+// эллиптический цилиндр
 Surface.prototype.ellipticalCylinder = (x = 0, y = 0, z = 0, a = 4, b = 4, height = 5, pointCount = 20) => {
     const points = [];
     const edges = [];
