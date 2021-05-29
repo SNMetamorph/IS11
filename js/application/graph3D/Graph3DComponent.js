@@ -46,7 +46,7 @@ class Graph3DComponent extends Component {
         //this.subjects.push(this.surface.bublik(32, 20));
         //this.subjects.push(this.surface.cone());
         //this.subjects.push(this.surface.ellipsoid());
-        this.subjects.push(this.surface.ellipticalCylinder());
+        this.subjects.push(this.surface.oneSheetHyperboloid());
     }
 
     printEdges(subject) {
