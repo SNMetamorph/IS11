@@ -5,25 +5,25 @@ Surface.prototype.sphere = (x = 0, y = 0, z = 0, radius = 4, step = 12) => {
     const polygones = [];
 
     function createPointFromSpherical(radius, zenith, azimuth) {
-        let x = radius * Math.sin(zenith) * Math.cos(azimuth);
-        let y = radius * Math.sin(zenith) * Math.sin(azimuth);
-        let z = radius * Math.cos(zenith);
-        return new Point(x, y, z);
+        let px = radius * Math.sin(zenith) * Math.cos(azimuth);
+        let py = radius * Math.sin(zenith) * Math.sin(azimuth);
+        let pz = radius * Math.cos(zenith);
+        return new Point(x + px, y + py, z + pz);
     }
 
     function createPoints(x, y, z, radius, step) {
         const zenithStep = Math.PI / step;
         const azimuthStep = 2 * Math.PI / step;
-        points.push(createPointFromSpherical(radius, 0, 0).add(x, y, z));
+        points.push(createPointFromSpherical(radius, 0, 0));
         for (let j = 0; j < step; ++j) {
             let azimuth = azimuthStep * j;
             for (let i = 1; i < step; ++i) {
                 let zenith = zenithStep * i;
-                const point = createPointFromSpherical(radius, zenith, azimuth).add(x, y, z);
+                const point = createPointFromSpherical(radius, zenith, azimuth);
                 points.push(point);
             }
         }
-        points.push(createPointFromSpherical(radius, Math.PI, 0).add(x, y, z));
+        points.push(createPointFromSpherical(radius, Math.PI, 0));
     }
 
     function createUpperCupEdges(step) {
