@@ -30,9 +30,10 @@ Surface.prototype.cone = (x = 0, y = 0, z = 0, r = 2, h = 5, steps = 10) => {
     function createVertEdges() {
         for (let i = 1; i <= steps; ++i) {
             for (let j = 0; j < steps - 1; ++j) {
-                let a = i + j * steps;
-                let b = i + (j + 1) * steps;
-                edges.push(new Edge(a, b));
+                edges.push(new Edge(
+                    i + j * steps, 
+                    i + (j + 1) * steps
+                ));
             }
         }
     }
@@ -52,7 +53,10 @@ Surface.prototype.cone = (x = 0, y = 0, z = 0, r = 2, h = 5, steps = 10) => {
 
     function createTopEdges() {
         for (let i = 1; i <= steps; ++i) {
-            edges.push(new Edge(steps * steps + 1, steps * (steps - 1) + i));
+            edges.push(new Edge(
+                steps * steps + 1, 
+                steps * (steps - 1) + i
+            ));
         }
     }
 
@@ -72,25 +76,26 @@ Surface.prototype.cone = (x = 0, y = 0, z = 0, r = 2, h = 5, steps = 10) => {
 
     function createTopPolygons() {
         for (let i = 1; i < steps; ++i) {
-            polygones.push(new Polygon([steps * steps + 1, steps * (steps - 1) + i, steps * (steps - 1) + (i+1)]));
+            polygones.push(new Polygon([
+                steps * steps + 1, 
+                steps * (steps - 1) + i, 
+                steps * (steps - 1) + (i+1)
+            ]));
         }
     }
 
     function createPolygons() {
         createBasePolygons();
-        let quads = [];
         for (let j = 0; j < steps; ++j) {
             for (let i = 1; i < steps; ++i) {
-                quads.push([i, i+1, i + j * steps, (i+1) + j * steps]);
+                polygones.push(new Polygon([
+                    i, 
+                    i+1, 
+                    i + j * steps, 
+                    (i+1) + j * steps
+                ]));
             }
         }
-        // unpack quads to triangles
-        quads.forEach((quad) => {
-            polygones.push(
-                new Polygon([quad[0], quad[1], quad[2]]),
-                new Polygon([quad[1], quad[2], quad[3]])
-            );
-        });
         createTopPolygons();
     }
 

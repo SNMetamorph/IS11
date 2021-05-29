@@ -43,11 +43,10 @@ Surface.prototype.ellipticalCylinder = (x = 0, y = 0, z = 0, a = 4, b = 4, heigh
 
     function createPolygons() 
     {
-        let quads = [];
         const levelCount = points.length / pointCount;
         for (let j = 0; j < levelCount - 1; ++j) {
             for (let i = 0; i < pointCount; ++i) {
-                quads.push([
+                polygones.push([
                     i + j * pointCount, 
                     (i+1) % pointCount + j * pointCount,
                     i + (j+1) * pointCount, 
@@ -55,14 +54,6 @@ Surface.prototype.ellipticalCylinder = (x = 0, y = 0, z = 0, a = 4, b = 4, heigh
                 ]);
             }
         }
-
-        // unpack quads to triangles
-        quads.forEach((quad) => {
-            polygones.push(
-                new Polygon([quad[0], quad[1], quad[2]]),
-                new Polygon([quad[1], quad[2], quad[3]])
-            );
-        });
     }
 
     createPoints();
