@@ -9,7 +9,7 @@ class Graph3DComponent extends Component {
             center: new Point(0, 0, -40),
             camera: new Point(0, 0, -50)
         }
-        this.LIGHT = new Light(-20, 2, 40, 32000);
+        this.LIGHT = new Light(-30, 0, 30, 32000);
         this.surface = new Surface();
         this.graph2D = new Graph2D({ 
             id: "graph3D", 
@@ -40,11 +40,13 @@ class Graph3DComponent extends Component {
 
     addSubjects() {
         //this.subjects.push(this.surface.cube(-5, -5, 0, 10));
-        this.subjects.push(this.surface.cube(-10, -25, 0, 5));
-        this.subjects.push(this.surface.cube(3, -25, 0, 2.5));
-        this.subjects.push(this.surface.sphere(-16, -10, 0));
+        //this.subjects.push(this.surface.cube(-10, -25, 0, 5));
+        //this.subjects.push(this.surface.cube(3, -25, 0, 2.5));
+        //this.subjects.push(this.surface.sphere(-16, -10, 0));
         //this.subjects.push(this.surface.bublik(32, 20));
-        this.subjects.push(this.surface.cone());
+        //this.subjects.push(this.surface.cone());
+        //this.subjects.push(this.surface.ellipsoid());
+        this.subjects.push(this.surface.ellipticalCylinder());
     }
 
     printEdges(subject) {

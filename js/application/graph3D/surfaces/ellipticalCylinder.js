@@ -46,12 +46,12 @@ Surface.prototype.ellipticalCylinder = (x = 0, y = 0, z = 0, a = 4, b = 4, heigh
         const levelCount = points.length / pointCount;
         for (let j = 0; j < levelCount - 1; ++j) {
             for (let i = 0; i < pointCount; ++i) {
-                polygones.push([
+                polygones.push(new Polygon([
                     i + j * pointCount, 
-                    (i+1) % pointCount + j * pointCount,
                     i + (j+1) * pointCount, 
-                    (i+1) % pointCount + (j+1) * pointCount
-                ]);
+                    (i+1) % pointCount + (j+1) * pointCount,
+                    (i+1) % pointCount + j * pointCount
+                ]));
             }
         }
     }
