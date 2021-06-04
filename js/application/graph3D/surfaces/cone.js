@@ -91,8 +91,8 @@ Surface.prototype.cone = (x = 0, y = 0, z = 0, r = 2, h = 5, steps = 10) => {
                 polygones.push(new Polygon([
                     i, 
                     i+1, 
+                    (i+1) + j * steps,
                     i + j * steps, 
-                    (i+1) + j * steps
                 ]));
             }
         }
