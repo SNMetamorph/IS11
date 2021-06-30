@@ -8,24 +8,24 @@ begin
   while ok do
   begin
   ClrScr;
-    writeln('Укажите режим:');
-    writeln('   1.Комплексные числа');
-    writeln('   2.Комплексные матрицы');
-    writeln('   3.Векторы');
-    writeln('   4.Комплексные векторы');
-    writeln('   5.Избранное');
-    writeln('   6.Стеки');
-    writeln('   7.Очереди');
-    writeln('   8.Списки групп');
-    writeln('   9.Файлы записи');
-    writeln('   10.Текстовые файлы');
-    writeln('   11.Деревья');
-    writeln('   12.Деревья массив');
-    writeln('   13.Бинарные деревья');
-    writeln('   14.Экзамен');
-    writeln('   0.Выход');
-    GoToXY(40,17); readln(Mode);
-    GoToXY(40,17); writeln('    ');
+    writeln('Выберите пункт:');
+    writeln(' [ 1] Комплексные числа');
+    writeln(' [ 2] Комплексные матрицы');
+    writeln(' [ 3] Векторы');
+    writeln(' [ 4] Комплексные векторы');
+    writeln(' [ 5] Избранное');
+    writeln(' [ 6] Стеки');
+    writeln(' [ 7] Очереди');
+    writeln(' [ 8] Списки групп');
+    writeln(' [ 9] Файлы записи');
+    writeln(' [10] Текстовые файлы');
+    writeln(' [11] Деревья');
+    writeln(' [12] Деревья массив');
+    writeln(' [13] Бинарные деревья');
+    writeln(' [14] Экзамен');
+    writeln(' [ 0] Выход');
+    readln(Mode);
+    writeln('    ');
     case Mode of
       1:MenuComplex;
       2:MenuCompMatr;
@@ -45,7 +45,7 @@ begin
     else
      begin
       GoToXY(40,17);
-      writeln('Ошибка!Повторите ввод!');
+      writeln('Ошибка! Повторите ввод!');
       delay(1000);
      end;
     end; 

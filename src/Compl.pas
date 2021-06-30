@@ -39,7 +39,7 @@ end;
 procedure Output(x,y:integer;var a: Complex);{Вывод} 
 begin
   //gotoxy(x+5,y+1);
-  if a.Im > 0 then
+  if a.Im >= 0 then
     writeln(a.Re, '+', a.Im, 'i')
   else 
     writeln(a.Re, a.Im, 'i');

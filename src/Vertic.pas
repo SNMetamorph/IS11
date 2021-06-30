@@ -88,7 +88,7 @@ begin
   k:= 0;
   while ok do 
   begin
-    writeln('Введите фамилию:');
+    writeln('Введите фамилию (буква N чтобы завершить ввод):');
     readln(namevalue);
     k:=k+1;
     if (NameValue = 'N') or
@@ -121,7 +121,7 @@ begin
   k:= 0;
   while ok do
   begin
-    writeln('Введите название группы:');
+    writeln('Введите название группы (буква N чтобы завершить ввод):');
     readln(GroupValue);
     k:=k+1;
     if (GroupValue = 'N') or

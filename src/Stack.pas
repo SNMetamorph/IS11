@@ -33,7 +33,7 @@ begin
   Top:=Nil;
   while ok do
   begin
-    writeln('Введите число:');
+    writeln('Введите число (введите 999 чтобы закончить):');
     readln(value);
     if value = 999 then
        ok:=False
@@ -54,7 +54,7 @@ begin
    ok:=True;
    while ok do
    begin
-     writeln('Добавьте число:');
+     writeln('Добавьте число (введите 999 чтобы закончить):');
      readln(value);
      if value = 999 then
        ok:=False
